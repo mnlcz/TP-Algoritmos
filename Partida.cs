@@ -39,9 +39,9 @@ namespace TP1_Algo2_Ro
 
         private static void GestionarAtaque(Soldado atacante, Jugador jugador, Coordenada coordenada)
         {
-            var soldadoEnemigo = j1.EncontrarSoldado(coordenada);
+            var soldadoEnemigo = jugador.EncontrarSoldado(coordenada);
             soldadoEnemigo!.eliminado = true;
-            j1.EliminarSoldado(coordenada);
+            jugador.EliminarSoldado(coordenada);
             tablero.QuitarElementoDe(coordenada);
             tablero.coordenadasInactivas.Append(coordenada);
         }
