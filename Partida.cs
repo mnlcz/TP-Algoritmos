@@ -41,7 +41,7 @@ namespace TP1_Algo2_Ro
         {
             var soldadoEnemigo = jugador.EncontrarSoldado(coordenada);
             soldadoEnemigo!.eliminado = true;
-            jugador.EliminarSoldado(coordenada);
+            jugador.ActualizarSoldados();
             tablero.QuitarElementoDe(coordenada);
             tablero.coordenadasInactivas.Append(coordenada);
         }

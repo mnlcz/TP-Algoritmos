@@ -24,9 +24,6 @@ namespace TP1_Algo2_Ro
             return null;
         }
 
-        public void EliminarSoldado(Coordenada c)
-        {
-            soldados = from soldado in soldados where !soldado.eliminado select soldado;
-        }
+        public void ActualizarSoldados() => soldados = from soldado in soldados where !soldado.eliminado select soldado;
     }
 }
