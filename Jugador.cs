@@ -13,6 +13,8 @@ namespace TP1_Algo2_Ro
                 new Soldado(new Coordenada(x, y3), 3) 
             };
         }
+        
+        public Jugador(Soldado[] s) => soldados = s;
 
         public Soldado? EncontrarSoldado(Coordenada c)
         {

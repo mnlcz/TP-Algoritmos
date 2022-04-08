@@ -117,6 +117,7 @@ namespace TP1_Algo2_Ro
             }
         }
 
+        // TODO: chequear el input usando regex.
         private static Coordenada PedirCoordenada()
         {
             Coordenada coordenada;

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// TODO: TestTablero.cs
+// TODO: TestPartida.cs
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
