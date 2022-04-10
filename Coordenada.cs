@@ -11,7 +11,7 @@ namespace TP1_Algo2_Ro
             Y = y;
         }
 
-        public bool EsValida() => (X <= 10 && Y <= 10) && (X >= 0 && Y >= 0);
+        public bool EsValida() => (X < 10 && Y < 10) && (X >= 0 && Y >= 0);
 
         public override string ToString() => $"X: {X}\tY:{Y}";
     }
