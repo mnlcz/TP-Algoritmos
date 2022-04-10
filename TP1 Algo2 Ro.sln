@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TP1 Algo2 Ro", "TP1 Algo2 Ro.csproj", "{CC9127A7-8A59-4352-A72C-310FC12B902E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC9127A7-8A59-4352-A72C-310FC12B902E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC9127A7-8A59-4352-A72C-310FC12B902E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC9127A7-8A59-4352-A72C-310FC12B902E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC9127A7-8A59-4352-A72C-310FC12B902E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A31EA71-066D-405F-8B1A-2272C829317B}
+	EndGlobalSection
+EndGlobal
