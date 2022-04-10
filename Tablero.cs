@@ -2,44 +2,40 @@ namespace TP1_Algo2_Ro
 {
     public class Tablero
     {
-        public char[,] tablero { get; set; }
+        public char[,] TableroDeJuego { get; set; }
 
-        public Coordenada[] coordenadasInactivas { get; set; }
+        public List<Coordenada> CoordenadasInactivas { get; set; }
 
         public Tablero()
         {
-            tablero = new char[10, 10];
-            for(int i = 0; i < 10; i++)
-                for(int j = 0; j < 10; j++)
-                    tablero[i, j] = ' ';
-            coordenadasInactivas = new Coordenada[] {};
+            TableroDeJuego = new char[10, 10];
+            for (int i = 0; i < 10; i++)
+                for (int j = 0; j < 10; j++)
+                    TableroDeJuego[i, j] = ' ';
+            CoordenadasInactivas = new List<Coordenada>();
         }
 
         public void Mostrar()
         {
-            for (int i = 0; i < tablero.GetLength(0); i++)
+            for (int i = 0; i < TableroDeJuego.GetLength(0); i++)
             {
-                for (int j = 0; j < tablero.GetLength(1); j++)
-                    Console.Write("[{0}] ", tablero[i, j]);
+                for (int j = 0; j < TableroDeJuego.GetLength(1); j++)
+                    Console.Write("[{0}] ", TableroDeJuego[i, j]);
                 Console.WriteLine();
             }
         }
 
-        public ObjetoEnCoordenada HayAlgoEn(Coordenada c)
+        public ObjetoEnCoordenada QueHayEn(Coordenada c)
         {
-            switch(tablero[c.X, c.Y])
+            return TableroDeJuego[c.X, c.Y] switch
             {
-                case 'X':
-                    return ObjetoEnCoordenada.INACTIVA;
-                case '1':
-                    return ObjetoEnCoordenada.J1;
-                case '2':
-                    return ObjetoEnCoordenada.J2;
-                default:
-                    return ObjetoEnCoordenada.NADA;
-            }
+                'X' => ObjetoEnCoordenada.INACTIVA,
+                '1' => ObjetoEnCoordenada.J1,
+                '2' => ObjetoEnCoordenada.J2,
+                _ => ObjetoEnCoordenada.NADA,
+            };
         }
 
-        public void QuitarElementoDe(Coordenada c) => tablero[c.X, c.Y] = 'X';
+        public void QuitarElementoDe(Coordenada c) => TableroDeJuego[c.X, c.Y] = 'X';
     }
 }

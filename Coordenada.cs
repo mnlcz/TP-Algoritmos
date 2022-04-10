@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 namespace TP1_Algo2_Ro
 {
     public record struct Coordenada

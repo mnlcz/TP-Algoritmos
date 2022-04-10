@@ -3,16 +3,16 @@ namespace TP1_Algo2_Ro
     public class Soldado
     {
         public readonly uint numero;
-        public Coordenada posicion { get; set; }
-        public bool eliminado { get; set; }
+        public Coordenada Posicion { get; set; }
+        public bool Eliminado { get; set; }
 
         public Soldado(Coordenada coordenada, uint nro)
         {
             numero = nro;
-            posicion = coordenada;
-            eliminado = false;
+            Posicion = coordenada;
+            Eliminado = false;
         }
 
-        public void Moverse(Coordenada c) => posicion = c;
+        public void Moverse(Coordenada c) => Posicion = c;
     }
 }

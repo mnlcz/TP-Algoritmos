@@ -1,16 +1,19 @@
-using Xunit;
 using TP1_Algo2_Ro;
+using Xunit;
 
-public class TestSoldado
+namespace TP1_Algo2_Ro.tests
 {
-    [Fact]
-    public void TestMoverse()
+    public class TestSoldado
     {
-        Coordenada origen = new(1, 1);
-        Coordenada destino = new(2, 2);
-        Soldado s = new(origen, 1);
-        Assert.Equal(s.posicion, origen);
-        s.Moverse(destino);
-        Assert.Equal(s.posicion, destino);
+        [Fact]
+        public void TestMoverse()
+        {
+            Coordenada origen = new(1, 1);
+            Coordenada destino = new(2, 2);
+            Soldado s = new(origen, 1);
+            Assert.Equal(s.Posicion, origen);
+            s.Moverse(destino);
+            Assert.Equal(s.Posicion, destino);
+        }
     }
 }
