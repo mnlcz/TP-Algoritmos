@@ -1,5 +1,4 @@
-﻿// TODO: TestTablero.cs
-// TODO: TestPartida.cs
+﻿// TODO: TestPartida.cs
 
 namespace TP1_Algo2_Ro
 {

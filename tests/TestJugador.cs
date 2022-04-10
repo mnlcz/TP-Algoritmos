@@ -13,7 +13,7 @@ namespace TP1_Algo2_Ro.tests
             new Soldado(new Coordenada(2, 2), 2),
             new Soldado(new Coordenada(3, 3), 3)
         };
-            return new Jugador(soldados);
+            return new Jugador(soldados, 1);
         }
 
         private static Jugador BaseSample(Soldado s1)
@@ -24,7 +24,7 @@ namespace TP1_Algo2_Ro.tests
             new Soldado(new Coordenada(2, 2), 2),
             new Soldado(new Coordenada(3, 3), 3)
         };
-            return new Jugador(soldados);
+            return new Jugador(soldados, 1);
         }
 
         [Fact]
@@ -52,6 +52,18 @@ namespace TP1_Algo2_Ro.tests
             s1.Eliminado = true;
             j.ActualizarSoldados();
             Assert.DoesNotContain(s1, j.Soldados);
+        }
+
+        [Fact]
+        public void TestMoverSoldado()
+        {
+            Coordenada origen = new(1, 1);
+            Coordenada destino = new(6, 6);
+            Soldado s1 = new(origen, 1);
+            Jugador j = BaseSample(s1);
+            Assert.Equal(origen, s1.Posicion);
+            j.MoverSoldado(1, destino);
+            Assert.Equal(destino, s1.Posicion);
         }
     }
 }

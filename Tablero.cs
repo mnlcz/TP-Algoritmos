@@ -3,7 +3,6 @@ namespace TP1_Algo2_Ro
     public class Tablero
     {
         public char[,] TableroDeJuego { get; set; }
-
         public List<Coordenada> CoordenadasInactivas { get; set; }
 
         public Tablero()
@@ -37,5 +36,26 @@ namespace TP1_Algo2_Ro
         }
 
         public void QuitarElementoDe(Coordenada c) => TableroDeJuego[c.X, c.Y] = 'X';
+
+        public void ActualizarContenido(Jugador j1, Jugador j2)
+        {
+            // Soldados
+            for (int i = 0; i < 3; i++)
+            {
+                var c1 = j1.Soldados.ElementAt(i).Posicion;
+                var c2 = j2.Soldados.ElementAt(i).Posicion;
+                TableroDeJuego[c1.X, c1.Y] = '1';
+                TableroDeJuego[c2.X, c2.Y] = '2';
+            }
+
+            // Coordenadas inactivas
+            if (CoordenadasInactivas.Count != 0)
+            {
+                foreach (var c in CoordenadasInactivas)
+                {
+                    TableroDeJuego[c.X, c.Y] = 'X';
+                }
+            }
+        }
     }
 }
