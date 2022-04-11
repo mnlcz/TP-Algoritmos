@@ -34,15 +34,19 @@ namespace TP1_Algo2_Ro
             Console.Write($"El jugador {turnoDe.Numero} tiene disponibles los soldados ");
             turnoDe.MostrarSoldados();
             (uint nSoldado, Coordenada coordenada) = GestionarInput(turnoDe);
-            Jugador? victima = turnoDe.Numero == 1 ? j2 : j1;
-            Atacar(victima, coordenada);
-            /* TODO:
-             *      - Preguntar si quiere moverse.
-             *      - En caso de que si:
-             *          - Nuevo PedirCoordenada() que evalue si hay un enemigo en la posicion.
-             *              - En caso de que si eliminar a ambos soldados.
-             */
-            //turnoDe.MoverSoldado(nSoldado, coordenada);
+            if(tablero.QueHayEn(coordenada) == ObjetoEnCoordenada.J1 || tablero.QueHayEn(coordenada) == ObjetoEnCoordenada.J2)
+            {
+                Jugador? victima = turnoDe.Numero == 1 ? j2 : j1;
+                Atacar(victima, coordenada);
+            }
+            bool quiereMoverse = QuiereMoverse();
+            if(quiereMoverse)
+            {
+                var d = PedirDireccion();
+                turnoDe.MoverSoldado(nSoldado, d);
+                GestionarEliminacion();
+                tablero.ActualizarContenido(j1, j2);
+            }
         }
 
         // Pre: la coordenada tiene un objeto atacable: j1 ataca a j2 || j2 ataca a j1
@@ -93,6 +97,58 @@ namespace TP1_Algo2_Ro
                 }
             } while (flag);
             return coordenada;
+        }
+
+        // TODO: test
+        private static Direccion PedirDireccion()
+        {
+            bool invalida = true;
+            Direccion direccion = Direccion.INVALIDA;
+            while (invalida)
+            {
+                Console.WriteLine("A donde queres mover el soldado? Posibles direcciones: ");
+                DireccionExtensions.MostrarOpciones();
+                string? input = Console.ReadLine();
+                if (input != null)
+                {
+                    direccion = DireccionExtensions.Mapear(input);
+                    invalida = false;
+                }
+                if (invalida)
+                    Console.WriteLine("Direccion invalida, ingresa otra");
+            }
+            return direccion;
+        }
+
+        // TODO: test
+        private static bool QuiereMoverse()
+        {
+            char? rta;
+            while(true)
+            {
+                Console.WriteLine("Queres moverte? S/N");
+                rta = Char.ToUpper(Console.ReadKey().KeyChar);
+                if(rta == 'S' || rta == 'N') break;
+                else
+                    Console.WriteLine("Respuesta invalida");
+            }
+            return rta == 'S';
+        }
+
+        // TODO: test
+        private static void GestionarEliminacion()
+        {
+            var query1 = from soldado 
+                     in j1.Soldados 
+                     where j2.Soldados.Any(s => s.Posicion == soldado.Posicion) 
+                     select soldado;
+            if (!query1.Any()) return;
+            var query2 = from soldado
+                         in j2.Soldados
+                         where j1.Soldados.Any(s => s.Posicion == soldado.Posicion)
+                         select soldado;
+            query1.First().Eliminado = true;
+            query2.First().Eliminado = true;
         }
     }
 }
