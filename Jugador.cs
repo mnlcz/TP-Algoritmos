@@ -41,10 +41,10 @@ namespace TP1_Algo2_Ro
         }
 
         // Pre: ambos parametros ya validos
-        public void MoverSoldado(uint nroSoldado, Coordenada coordenada)
+        public void MoverSoldado(uint nroSoldado, Direccion d)
         {
             Soldado s = (from soldado in Soldados where soldado.numero == nroSoldado select soldado).First();
-            s.Moverse(coordenada);
+            s.Moverse(d);
         }
     }
 }
