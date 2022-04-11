@@ -41,7 +41,5 @@ namespace TP1_Algo2_Ro.tests
             t.QuitarElementoDe(c);
             Assert.Equal(ObjetoEnCoordenada.INACTIVA, t.QueHayEn(c));
         }
-
-        // TODO: TestActualizarContenido()
     }
 }

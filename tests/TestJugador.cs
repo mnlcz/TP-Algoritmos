@@ -57,13 +57,15 @@ namespace TP1_Algo2_Ro.tests
         [Fact]
         public void TestMoverSoldado()
         {
-            Coordenada origen = new(1, 1);
-            Coordenada destino = new(6, 6);
-            Soldado s1 = new(origen, 1);
-            Jugador j = BaseSample(s1);
-            Assert.Equal(origen, s1.Posicion);
-            j.MoverSoldado(1, destino);
-            Assert.Equal(destino, s1.Posicion);
+            Jugador j = BaseSample();
+            uint nro = 1;
+            var soldado = (from s
+                        in j.Soldados
+                        where s.numero == nro
+                        select s).First();
+            Coordenada esperada = new(2, 1);
+            j.MoverSoldado(nro, Direccion.DERECHA);
+            Assert.Equal(esperada, soldado.Posicion);
         }
     }
 }
