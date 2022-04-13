@@ -14,7 +14,7 @@ namespace TP1_Algo2_Ro.tests
         [InlineData(Direccion.ABAJO_IZQUIERDA)]
         [InlineData(Direccion.ARRIBA_DERECHA)]
         [InlineData(Direccion.ARRIBA_IZQUIERDA)]
-        public void TestMoverse(Direccion d)
+        public void TestMoverse(Direccion d)    // FIXME
         {
             Coordenada c = new(1, 1);
             Soldado s = new(c, 1);

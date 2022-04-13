@@ -18,7 +18,7 @@ namespace TP1_Algo2_Ro
         {
             switch(d)
             {
-                case Direccion.ABAJO:
+                case Direccion.ABAJO: // FIXME: se mueve a la derecha
                     Posicion = new(Posicion.X, Posicion.Y + 1);
                     break;
                 case Direccion.ARRIBA:

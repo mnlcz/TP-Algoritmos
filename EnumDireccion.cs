@@ -20,27 +20,28 @@
             input = input.Trim().ToUpper();
             Direccion d = input switch
             {
-                "ARRIBA" => Direccion.ARRIBA,
-                "ABAJO" => Direccion.ABAJO,
-                "IZQUIERDA" => Direccion.IZQUIERDA,
-                "DERECHA" => Direccion.DERECHA,
-                "ARRIBA_DERECHA" => Direccion.ARRIBA_DERECHA,
-                "ARRIBA_IZQUIERDA" => Direccion.ARRIBA_IZQUIERDA,
-                "ABAJO_DERECHA" => Direccion.ABAJO_DERECHA,
-                "ABAJO_IZQUIERDA" => Direccion.ABAJO_IZQUIERDA,
-                _ => throw new ArgumentException("Input invalido")
+                "W" => Direccion.ARRIBA,
+                "S" => Direccion.ABAJO,
+                "A" => Direccion.IZQUIERDA,
+                "D" => Direccion.DERECHA,
+                "E" => Direccion.ARRIBA_DERECHA,
+                "Q" => Direccion.ARRIBA_IZQUIERDA,
+                "Z" => Direccion.ABAJO_DERECHA,
+                "C" => Direccion.ABAJO_IZQUIERDA,
+                _ => Direccion.INVALIDA
             };
             return d;
         }
 
         public static void MostrarOpciones()
         {
+            var keys = new[] { 'W', 'S', 'A', 'D', 'E', 'Q', 'Z', 'C' };
             var query = from d
                        in Enum.GetValues(typeof(Direccion)).Cast<Direccion>()
                         where d != Direccion.INVALIDA
                         select d;
-            foreach (var d in query)
-                Console.Write($"{d} ");
+            for(int i = 0; i < keys.Length; i++)
+                Console.WriteLine($"{query.ElementAt(i)} ==> {keys[i]}");
         }
     }
 }

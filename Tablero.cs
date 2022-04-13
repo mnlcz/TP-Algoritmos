@@ -39,6 +39,7 @@ namespace TP1_Algo2_Ro
 
         public void ActualizarContenido(Jugador j1, Jugador j2)
         {
+            Vaciar();
             // Soldados
             for (int i = 0; i < 3; i++)
             {
@@ -56,6 +57,13 @@ namespace TP1_Algo2_Ro
                     TableroDeJuego[c.X, c.Y] = 'X';
                 }
             }
+        }
+
+        private void Vaciar()
+        {
+            for (int i = 0; i < 10; i++)
+                for (int j = 0; j < 10; j++)
+                    TableroDeJuego[i, j] = ' ';
         }
     }
 }

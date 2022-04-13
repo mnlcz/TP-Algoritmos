@@ -31,7 +31,7 @@ namespace TP1_Algo2_Ro
         private static void EmpezarTurno()
         {
             Console.WriteLine($"TURNO DEL JUGADOR {turnoDe.Numero}");
-            Console.Write($"El jugador {turnoDe.Numero} tiene disponibles los soldados ");
+            Console.WriteLine($"El jugador {turnoDe.Numero} tiene disponibles los soldados ");
             turnoDe.MostrarSoldados();
             (uint nSoldado, Coordenada coordenada) = GestionarInput(turnoDe);
             if(tablero.QueHayEn(coordenada) == ObjetoEnCoordenada.J1 || tablero.QueHayEn(coordenada) == ObjetoEnCoordenada.J2)
@@ -99,12 +99,13 @@ namespace TP1_Algo2_Ro
             {
                 Console.Write("Con cual atacas? ");
                 nroSoldado = Convert.ToUInt32(Console.ReadLine());
-            } while (turnoDe.Soldados.Any(s => s.numero == nroSoldado));
+            } while (!turnoDe.Soldados.Any(s => s.numero == nroSoldado));
             return (nroSoldado, c);
         }
 
         private static Coordenada PedirCoordenada(Jugador j)
         {
+            Console.WriteLine("===> ATACANDO <===");
             bool flag;
             Coordenada coordenada;
             do
@@ -140,7 +141,8 @@ namespace TP1_Algo2_Ro
                 if (input != null)
                 {
                     direccion = DireccionExtensions.Mapear(input);
-                    invalida = false;
+                    if(direccion != Direccion.INVALIDA)
+                        invalida = false;
                 }
                 if (invalida)
                     Console.WriteLine("Direccion invalida, ingresa otra");
