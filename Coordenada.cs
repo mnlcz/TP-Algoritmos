@@ -14,5 +14,7 @@ namespace TP1_Algo2_Ro
         public bool EsValida() => (X < 10 && Y < 10) && (X >= 0 && Y >= 0);
 
         public override string ToString() => $"X: {X}\tY:{Y}";
+
+        public int Distancia(Coordenada otraCoordenada) => Math.Abs(otraCoordenada.X - X) + Math.Abs(otraCoordenada.Y - Y);
     }
 }
