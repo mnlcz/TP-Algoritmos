@@ -76,7 +76,6 @@ namespace TP1_Algo2_Ro
             var distancia = coordenadaAtacante.Distancia(coordenadaVictima);
             return distancia switch 
             {
-                10 => 5,
                 9 => 10,
                 8 => 20,
                 7 => 30,
@@ -85,7 +84,8 @@ namespace TP1_Algo2_Ro
                 4 => 60,
                 3 => 70,
                 2 => 80,
-                _ => 90,
+                1 => 90,
+                _ => 0
             };
         }
 
