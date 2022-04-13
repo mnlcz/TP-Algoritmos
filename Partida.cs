@@ -36,8 +36,12 @@ namespace TP1_Algo2_Ro
             (uint nSoldado, Coordenada coordenada) = GestionarInput(turnoDe);
             if(tablero.QueHayEn(coordenada) == ObjetoEnCoordenada.J1 || tablero.QueHayEn(coordenada) == ObjetoEnCoordenada.J2)
             {
-                Jugador? victima = turnoDe.Numero == 1 ? j2 : j1;
-                Atacar(victima, coordenada);
+                Soldado s = (from soldado
+                        in turnoDe.Soldados
+                        where soldado.numero == nSoldado
+                        select soldado).First();
+                Jugador ? victima = turnoDe.Numero == 1 ? j2 : j1;
+                Atacar(s, victima, coordenada);
             }
             bool quiereMoverse = QuiereMoverse();
             if(quiereMoverse)
@@ -50,13 +54,37 @@ namespace TP1_Algo2_Ro
         }
 
         // Pre: la coordenada tiene un objeto atacable: j1 ataca a j2 || j2 ataca a j1
-        public static void Atacar(Jugador victima, Coordenada coordenada)
+        public static void Atacar(Soldado soldadoAtacante, Jugador victima, Coordenada coordenada)
         {
-            var soldadoEnemigo = victima.EncontrarSoldado(coordenada);
-            soldadoEnemigo!.Eliminado = true;
-            victima.ActualizarSoldados();
-            tablero.QuitarElementoDe(coordenada);
-            tablero.CoordenadasInactivas.Add(coordenada);
+            var rand = new Random();
+            int porcentajeExito = ObtenerPorcentajeExito(soldadoAtacante.Posicion, coordenada);
+            var result = rand.Next(1, 101);
+            if(result <= porcentajeExito)
+            {
+                var soldadoEnemigo = victima.EncontrarSoldado(coordenada);
+                soldadoEnemigo!.Eliminado = true;
+                victima.ActualizarSoldados();
+                tablero.QuitarElementoDe(coordenada);
+                tablero.CoordenadasInactivas.Add(coordenada);
+            }
+            else
+                Console.WriteLine("El ataque falló...");
+        }
+
+        private static int ObtenerPorcentajeExito(Coordenada coordenadaAtacante, Coordenada coordenadaVictima)
+        {
+            var distancia = coordenadaAtacante.Distancia(coordenadaVictima);
+            int r;
+            if (distancia <= 20 && distancia >= 18) r = 10;
+            else if (distancia >= 15 && distancia < 18) r = 25;
+            else if (distancia >= 13 && distancia < 15) r = 40;
+            else if (distancia >= 10 && distancia < 13) r = 50;
+            else if (distancia >= 7 && distancia < 10) r = 65;
+            else if (distancia >= 5 && distancia < 7) r = 75;
+            else if (distancia >= 3 && distancia < 5) r = 80;
+            else if (distancia == 2) r = 90;
+            else r = 95;
+            return r;
         }
 
         public static void TerminarTurno() => turnoDe = (turnoDe == j1) ? j2 : j1;
@@ -73,7 +101,6 @@ namespace TP1_Algo2_Ro
             return (nroSoldado, c);
         }
 
-        // TODO: chequear el input usando regex.
         private static Coordenada PedirCoordenada(Jugador j)
         {
             bool flag;
@@ -99,7 +126,6 @@ namespace TP1_Algo2_Ro
             return coordenada;
         }
 
-        // TODO: test
         private static Direccion PedirDireccion()
         {
             bool invalida = true;
@@ -120,7 +146,6 @@ namespace TP1_Algo2_Ro
             return direccion;
         }
 
-        // TODO: test
         private static bool QuiereMoverse()
         {
             char? rta;
@@ -135,7 +160,6 @@ namespace TP1_Algo2_Ro
             return rta == 'S';
         }
 
-        // TODO: test
         private static void GestionarEliminacion()
         {
             var query1 = from soldado 
