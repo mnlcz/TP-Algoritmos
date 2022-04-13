@@ -15,6 +15,6 @@ namespace TP1_Algo2_Ro
 
         public override string ToString() => $"X: {X}\tY:{Y}";
 
-        public int Distancia(Coordenada otraCoordenada) => Math.Abs(otraCoordenada.X - X) + Math.Abs(otraCoordenada.Y - Y);
+        public int Distancia(Coordenada otraCoordenada) => Math.Max((Math.Abs(otraCoordenada.X - X)), (Math.Abs(otraCoordenada.Y - Y)));
     }
 }

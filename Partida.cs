@@ -74,17 +74,19 @@ namespace TP1_Algo2_Ro
         private static int ObtenerPorcentajeExito(Coordenada coordenadaAtacante, Coordenada coordenadaVictima)
         {
             var distancia = coordenadaAtacante.Distancia(coordenadaVictima);
-            int r;
-            if (distancia <= 20 && distancia >= 18) r = 10;
-            else if (distancia >= 15 && distancia < 18) r = 25;
-            else if (distancia >= 13 && distancia < 15) r = 40;
-            else if (distancia >= 10 && distancia < 13) r = 50;
-            else if (distancia >= 7 && distancia < 10) r = 65;
-            else if (distancia >= 5 && distancia < 7) r = 75;
-            else if (distancia >= 3 && distancia < 5) r = 80;
-            else if (distancia == 2) r = 90;
-            else r = 95;
-            return r;
+            return distancia switch 
+            {
+                10 => 5,
+                9 => 10,
+                8 => 20,
+                7 => 30,
+                6 => 40,
+                5 => 50,
+                4 => 60,
+                3 => 70,
+                2 => 80,
+                _ => 90,
+            };
         }
 
         public static void TerminarTurno() => turnoDe = (turnoDe == j1) ? j2 : j1;
