@@ -18,26 +18,26 @@ namespace TP1_Algo2_Ro
         {
             switch(d)
             {
-                case Direccion.ABAJO: // FIXME: se mueve a la derecha
+                case Direccion.DERECHA: 
                     Posicion = new(Posicion.X, Posicion.Y + 1);
                     break;
-                case Direccion.ARRIBA:
+                case Direccion.IZQUIERDA:
                     Posicion = new(Posicion.X, Posicion.Y - 1);
                     break;
-                case Direccion.DERECHA:
+                case Direccion.ABAJO:
                     Posicion = new(Posicion.X + 1, Posicion.Y);
                     break;
-                case Direccion.IZQUIERDA:
+                case Direccion.ARRIBA:
                     Posicion = new(Posicion.X - 1, Posicion.Y);
                     break;
                 case Direccion.ABAJO_DERECHA:
                     Posicion = new(Posicion.X + 1, Posicion.Y + 1);
                     break;
-                case Direccion.ARRIBA_DERECHA:
-                    Posicion = new(Posicion.X + 1, Posicion.Y - 1);
+                case Direccion.ARRIBA_DERECHA: 
+                    Posicion = new(Posicion.X - 1, Posicion.Y + 1);
                     break;
                 case Direccion.ABAJO_IZQUIERDA:
-                    Posicion = new(Posicion.X - 1, Posicion.Y + 1);
+                    Posicion = new(Posicion.X + 1, Posicion.Y - 1);
                     break;
                 case Direccion.ARRIBA_IZQUIERDA:
                     Posicion = new(Posicion.X - 1, Posicion.Y - 1);

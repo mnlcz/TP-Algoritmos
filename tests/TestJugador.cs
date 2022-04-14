@@ -63,7 +63,7 @@ namespace TP1_Algo2_Ro.tests
                         in j.Soldados
                         where s.numero == nro
                         select s).First();
-            Coordenada esperada = new(2, 1);
+            Coordenada esperada = new(1, 2);
             j.MoverSoldado(nro, Direccion.DERECHA);
             Assert.Equal(esperada, soldado.Posicion);
         }
