@@ -30,27 +30,46 @@ namespace TP1_Algo2_Ro
 
         private static void EmpezarTurno()
         {
-            Console.WriteLine($"TURNO DEL JUGADOR {turnoDe.Numero}");
-            Console.WriteLine($"El jugador {turnoDe.Numero} tiene disponibles los soldados ");
-            turnoDe.MostrarSoldados();
+            TextoInicial();
             (uint nSoldado, Coordenada coordenada) = GestionarInput(turnoDe);
-            if(tablero.QueHayEn(coordenada) == ObjetoEnCoordenada.J1 || tablero.QueHayEn(coordenada) == ObjetoEnCoordenada.J2)
-            {
-                Soldado s = (from soldado
+            Soldado s = (from soldado
                         in turnoDe.Soldados
-                        where soldado.numero == nSoldado
-                        select soldado).First();
-                Jugador ? victima = turnoDe.Numero == 1 ? j2 : j1;
+                         where soldado.numero == nSoldado
+                         select soldado).First();
+            if (tablero.QueHayEn(coordenada) == ObjetoEnCoordenada.J1 || tablero.QueHayEn(coordenada) == ObjetoEnCoordenada.J2)
+            {
+                Jugador? victima = turnoDe.Numero == 1 ? j2 : j1;
                 Atacar(s, victima, coordenada);
             }
             bool quiereMoverse = QuiereMoverse();
-            if(quiereMoverse)
+            if (quiereMoverse)
             {
-                var d = PedirDireccion();
+                bool invalido = true;
+                Direccion d = Direccion.INVALIDA;
+                while (invalido)
+                {
+                    d = PedirDireccion();
+                    if (d.MovimientoValido(s.Posicion))
+                        invalido = false;
+                }
                 turnoDe.MoverSoldado(nSoldado, d);
                 GestionarEliminacion();
                 tablero.ActualizarContenido(j1, j2);
             }
+        }
+
+        private static void TextoInicial()
+        {
+            Console.WriteLine($"TURNO DEL JUGADOR {turnoDe.Numero}");
+            Console.WriteLine($"El jugador {turnoDe.Numero} tiene disponibles los soldados ");
+            turnoDe.MostrarSoldados();
+            Console.WriteLine("===========================================");
+            Console.WriteLine($"El rival tiene soldados en las posiciones ");
+            if (turnoDe == j1)
+                j2.MostrarSoldados();
+            else
+                j1.MostrarSoldados();
+            Console.WriteLine();
         }
 
         // Pre: la coordenada tiene un objeto atacable: j1 ataca a j2 || j2 ataca a j1
@@ -89,7 +108,18 @@ namespace TP1_Algo2_Ro
             };
         }
 
-        public static void TerminarTurno() => turnoDe = (turnoDe == j1) ? j2 : j1;
+        public static void TerminarTurno()
+        {
+            turnoDe = (turnoDe == j1) ? j2 : j1;
+            Console.Clear();
+            //GenerarArchivos();
+        }
+
+        // TODO: implementar
+        private static void GenerarArchivos()
+        {
+            throw new NotImplementedException();
+        }
 
         private static (uint, Coordenada) GestionarInput(Jugador j)
         {
@@ -105,7 +135,7 @@ namespace TP1_Algo2_Ro
 
         private static Coordenada PedirCoordenada(Jugador j)
         {
-            Console.WriteLine("===> ATACANDO <===");
+            Console.WriteLine("===============> ATACANDO <===============");
             bool flag;
             Coordenada coordenada;
             do
@@ -131,12 +161,14 @@ namespace TP1_Algo2_Ro
 
         private static Direccion PedirDireccion()
         {
+            Console.Clear();
             bool invalida = true;
             Direccion direccion = Direccion.INVALIDA;
             while (invalida)
             {
                 Console.WriteLine("A donde queres mover el soldado? Posibles direcciones: ");
                 DireccionExtensions.MostrarOpciones();
+                tablero.Mostrar();
                 string? input = Console.ReadLine();
                 if (input != null)
                 {
@@ -155,8 +187,9 @@ namespace TP1_Algo2_Ro
             char? rta;
             while(true)
             {
-                Console.WriteLine("Queres moverte? S/N");
+                Console.Write("Queres moverte? S/N: ");
                 rta = Char.ToUpper(Console.ReadKey().KeyChar);
+                Console.WriteLine();
                 if(rta == 'S' || rta == 'N') break;
                 else
                     Console.WriteLine("Respuesta invalida");
